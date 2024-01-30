@@ -1,0 +1,8 @@
+export const MT_SOCKET_API_COMMAND_PORT = 77;
+export const MT_SOCKET_API_TRACKER_PORT = 78;
+export const MT_SOCKET_API_HOST = '127.0.0.1';
+
+export const MESSAGES = {
+  SYMBOL_LIST: 'SYMBOL_LIST',
+  TRACK_OHLC: 'TRACK_OHLC',
+};

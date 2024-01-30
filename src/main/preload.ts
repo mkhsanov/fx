@@ -2,7 +2,13 @@
 /* eslint no-unused-vars: off */
 import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
 
-export type Channels = 'ipc-example';
+export type Channels =
+  | 'start-mt-socket-api'
+  | 'stop-mt-socket-api'
+  | 'get-symbol-list'
+  | 'start-ohlc-tracker'
+  | 'stop-ohlc-tracker'
+  | 'update-ohlc';
 
 const electronHandler = {
   ipcRenderer: {

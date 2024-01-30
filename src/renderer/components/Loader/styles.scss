@@ -1,0 +1,10 @@
+$primary-color: #FFF;
+@import 'loaders.css/src/animations/ball-scale-ripple.scss';
+
+.loader-hidden {
+  display: none;
+}
+
+.loader-active {
+  display: block;
+}

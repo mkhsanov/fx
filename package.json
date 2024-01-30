@@ -1,5 +1,5 @@
 {
-  "description": "A foundation for scalable desktop apps",
+  "description": "Application for forex online trading",
   "keywords": [
     "electron",
     "boilerplate",
@@ -11,25 +11,24 @@
     "hot",
     "reload"
   ],
-  "homepage": "https://github.com/electron-react-boilerplate/electron-react-boilerplate#readme",
+  "homepage": "https://github.com/mkhsanov/fx.git",
   "bugs": {
-    "url": "https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues"
+    "url": "https://github.com/mkhsanov/fx/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/electron-react-boilerplate/electron-react-boilerplate.git"
+    "url": "https://github.com/mkhsanov/fx.git"
   },
   "license": "MIT",
   "author": {
-    "name": "Electron React Boilerplate Maintainers",
-    "email": "electronreactboilerplate@gmail.com",
-    "url": "https://electron-react-boilerplate.js.org"
+    "name": "Marat Khasanov",
+    "email": "khasanov@outlook.com"
   },
   "contributors": [
     {
-      "name": "Amila Welihinda",
-      "email": "amilajack@gmail.com",
-      "url": "https://github.com/amilajack"
+      "name": "Marat Khasanov",
+      "email": "khasanov@outlook.com",
+      "url": "https://github.com/mkhsanov"
     }
   ],
   "main": "./src/main/main.ts",
@@ -99,8 +98,11 @@
     "electron-debug": "^3.2.0",
     "electron-log": "^4.4.8",
     "electron-updater": "^6.1.4",
+    "loaders.css": "^0.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-loaders": "^3.0.1",
+    "react-redux": "^9.1.0",
     "react-router-dom": "^6.16.0"
   },
   "devDependencies": {

@@ -12,6 +12,8 @@ import path from 'path';
 import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
+import { Timeframe } from '@src/types';
+import MTSocketApi from './services/MTSocketApi';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 
@@ -25,10 +27,37 @@ class AppUpdater {
 
 let mainWindow: BrowserWindow | null = null;
 
-ipcMain.on('ipc-example', async (event, arg) => {
-  const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
-  console.log(msgTemplate(arg));
-  event.reply('ipc-example', msgTemplate('pong'));
+ipcMain.on('start-mt-socket-api', async (event) => {
+  const result = await MTSocketApi.start();
+  event.reply('start-mt-socket-api', result);
+});
+
+ipcMain.on('stop-mt-socket-api', async (event) => {
+  const result = await MTSocketApi.stop();
+  event.reply('stop-mt-socket-api', result);
+});
+
+ipcMain.on('stop-mt-socket-api', async (event) => {
+  const result = await MTSocketApi.stop();
+  event.reply('stop-mt-socket-api', result);
+});
+
+ipcMain.on('get-symbol-list', async (event) => {
+  const result = await MTSocketApi.getSymbolList();
+  event.reply('get-symbol-list', result);
+});
+
+ipcMain.on(
+  'start-ohlc-tracker',
+  async (event, symbols: string[], timeframe: Timeframe) => {
+    const result = await MTSocketApi.startOHLCTracker(symbols, timeframe);
+    event.reply('start-ohlc-tracker', result);
+  },
+);
+
+ipcMain.on('stop-ohlc-tracker', async (event, timeframe: Timeframe) => {
+  const result = await MTSocketApi.stopOHLCTracker(timeframe);
+  event.reply('stop-ohlc-tracker', result);
 });
 
 if (process.env.NODE_ENV === 'production') {
@@ -84,6 +113,14 @@ const createWindow = async () => {
   mainWindow.loadURL(resolveHtmlPath('index.html'));
 
   mainWindow.on('ready-to-show', () => {
+    const onOHLCUpdateCallback = (value: unknown) => {
+      if (mainWindow) {
+        mainWindow.webContents.send('update-ohlc', value);
+      }
+    };
+
+    MTSocketApi.subscribeOHLCTracker(onOHLCUpdateCallback);
+
     if (!mainWindow) {
       throw new Error('"mainWindow" is not defined');
     }
